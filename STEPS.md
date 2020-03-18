@@ -1,4 +1,5 @@
-Good Practices for Python
+Since I'm new in Python and Django I write down all the steps 
+that I did to start the project
 
 ### Steps done creating this project
 
@@ -39,7 +40,7 @@ pip freeze > requirements.txt
 
 9- create a app recipe
 ```
-tk841it: ~/work/eballo/exercise-tp/recipeapp [git:master] 11:56:56
+tk841it: ~/work/eballo/exercise-recipe-api/app/ [git:master] 11:56:56
 (venv)  > python manage.py startapp recipe
 ```
 
@@ -79,3 +80,5 @@ urlpatterns = [
 python manage.py runserver
 ```
 Check http://127.0.0.1:8000/recipes/
+
+14- From now on Focus on the logic
