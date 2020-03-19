@@ -13,6 +13,7 @@ install:
 
 script:
   - docker-compose run app sh -c "python manage.py test && flake8"
+  - docker-compose run app sh -c "coverage run manage.py test"
 
 # Push the results back to codecov
 after_success:
