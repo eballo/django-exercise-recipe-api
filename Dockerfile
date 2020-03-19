@@ -17,4 +17,5 @@ COPY ./app /app
 
 RUN adduser -D pythonUser
 RUN chown pythonUser:pythonUser -R /app/
+RUN chmod -R 755 /app/
 USER pythonUser
