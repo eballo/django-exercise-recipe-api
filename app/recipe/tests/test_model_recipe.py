@@ -6,7 +6,7 @@ from recipe import models
 class ModelRecipeTests(TestCase):
 
     def test_recipe_str(self):
-        """Test the recipe string representation"""
+        """Test the recipe model string representation"""
         recipe = models.Recipe.objects.create(
             name='Cheese cake',
             description="A delicious cheese cake!"
@@ -15,7 +15,7 @@ class ModelRecipeTests(TestCase):
         self.assertEqual(str(recipe), recipe.name)
 
     def test_ingredients_str(self):
-        """Test the ingredients string representation"""
+        """Test the ingredients model string representation"""
         ingredient = models.Ingredient.objects.create(
             name='pasta'
         )
