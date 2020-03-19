@@ -5,10 +5,8 @@ python:
 services:
   - docker
 
-before_script: pip install docker-compose
-
-# Install the codecov pip dependency
-install:
+before_script:
+  - pip install docker-compose
   - pip install codecov
 
 script:
