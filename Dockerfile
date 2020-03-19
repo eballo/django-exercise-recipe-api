@@ -16,4 +16,5 @@ WORKDIR /app
 COPY ./app /app
 
 RUN adduser -D pythonUser
+RUN chown pythonUser:pythonUser -R /app/
 USER pythonUser
