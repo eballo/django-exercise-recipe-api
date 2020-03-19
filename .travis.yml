@@ -7,6 +7,13 @@ services:
 
 before_script: pip install docker-compose
 
+# Install the codecov pip dependency
+install:
+  - pip install codecov
+
 script:
   - docker-compose run app sh -c "python manage.py test && flake8"
-  - bash <(curl -s https://codecov.io/bash)
+
+# Push the results back to codecov
+after_success:
+  - codecov
