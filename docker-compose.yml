@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  backend:
+  app:
     build:
       context: .
     ports:
@@ -17,7 +17,6 @@ services:
       - DB_NAME=app
       - DB_USER=postgres
       - DB_PASS=supersecret
-      - CODECOV_TOKEN=${CODECOV_TOKEN}
     depends_on:
       - db
 

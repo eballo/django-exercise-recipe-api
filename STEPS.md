@@ -5,7 +5,8 @@ that I did to start the project
 
 1- Create a ``virutalenv`` for each project
 ```
-> python3.6 -m venv --prompt Django .venv
+> python3.6 -m venv --prompt Django venv
+> python3.7 -m venv --prompt Django venv
 ```
 2- activate the virtual env
 ```
@@ -82,3 +83,7 @@ python manage.py runserver
 Check http://127.0.0.1:8000/recipes/
 
 14- From now on Focus on the logic
+
+## USEFUL
+```docker-compose run app sh -c "python manage.py makemigrations recipe"```
+``` docker exec -i exercise-recipe-api_app_1 /bin/sh```
