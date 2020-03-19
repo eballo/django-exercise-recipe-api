@@ -21,20 +21,24 @@ be able to manage a recipe with ingredients:
 even if that means multiple Ingredient instances with the exact same name
 
 ## Getting up and running
+### With Docker
+```> docker-compose -up ```
+### With virtualenv
+
 - Check out the project
 - Create the virtualenv
 
-```python3.6 -m venv --prompt Django .venv```
+```> python3.6 -m venv --prompt Django .venv```
 - activate the venv
 
-```source venv/bin/activate```
+```> source venv/bin/activate```
 - Install requirements.txt
 
-```pip install -r requirements.txt```
+```> pip install -r requirements.txt```
 
 - Start the server
 
-``` python manage.py runserver ```
+```> python manage.py runserver ```
 
 ## Usage
 
