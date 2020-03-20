@@ -4,7 +4,7 @@ from rest_framework.test import APIClient
 from recipe.models import Recipe
 from recipe.serializers import RecipeSerializer
 
-RECIPE_URL = "/api/recipies/"
+RECIPE_URL = "/api/recipes/"
 
 def sample_recipe(**params):
     """Create and return a sample recipe for testing"""
@@ -26,17 +26,9 @@ class PublicRecipeApiTests(TestCase):
     def test_create_a_recipe(self):
         """Test creating a recipes POST"""
         
-        payload = {
-                "name": "Pizza",
-                "description": "Put it in the oven",
-                "ingredients": [
-                                {"name": "dough"}, 
-                                {"name": "cheese"},
-                                {"name": "tomato"}
-                                ]
-                }
+        payload = '{"name": "Pizza", "description": "Put it in the oven", "ingredients": [{"name": "dough"}, {"name": "cheese"},{"name": "tomato"}]}'
         
-        res = self.client.post(RECIPE_URL, payload)
+        res = self.client.post(RECIPE_URL, payload, content_type="application/json")
         #import pdb; pdb.set_trace()
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
