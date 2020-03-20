@@ -1,35 +1,30 @@
 from django.http import HttpResponse
 from rest_framework import viewsets
 
-from . import serializers
-from . import models
+from recipe.serializers import RecipeSerializer
+from recipe.models import Recipe
 
 
-class RecipeViewSet(viewsets.ViewSet):
-    """
-    Example empty viewset demonstrating the standard
-    actions that will be handled by a router class.
+class RecipeViewSet(viewsets.ModelViewSet):
+    """ Manage a Recipe in the database """
 
-    If you're using format suffixes, make sure to also include
-    the `format=None` keyword argument for each action.
-    """
-    queryset = models.Recipe.objects.all()
-    serializer_class = serializers.RecipeSerializer
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
 
     def list(self, request):
         return HttpResponse('list')
 
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
         return HttpResponse('create')
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request):
         return HttpResponse('retrieve')
 
-    def update(self, request, pk=None):
+    def update(self, request):
         return HttpResponse('update')
 
-    def partial_update(self, request, pk=None):
+    def partial_update(self, request):
         return HttpResponse('partial')
 
-    def destroy(self, request, pk=None):
+    def destroy(self, request):
         return HttpResponse('destroy')

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from recipe import models
+from recipe.models import Recipe, Ingredient
 
 
 class ModelRecipeTests(TestCase):
@@ -9,7 +9,7 @@ class ModelRecipeTests(TestCase):
         """
         Test the recipe model string representation
         """
-        recipe = models.Recipe.objects.create(
+        recipe = Recipe.objects.create(
             name='Cheese cake',
             description="A delicious cheese cake!"
         )
@@ -20,12 +20,12 @@ class ModelRecipeTests(TestCase):
         """
         Test one ingredients model string representation
         """
-        recipe = models.Recipe.objects.create(
+        recipe = Recipe.objects.create(
             name='Cheese cake',
             description="A delicious cheese cake!"
         )
 
-        ingredient = models.Ingredient.objects.create(
+        ingredient = Ingredient.objects.create(
             name='cheese',
             recipe=recipe
         )
@@ -36,17 +36,17 @@ class ModelRecipeTests(TestCase):
         """
         Test two ingredients model string representation
         """
-        recipe = models.Recipe.objects.create(
+        recipe = Recipe.objects.create(
             name='Cheese cake',
             description="A delicious cheese cake!"
         )
 
-        ingredient1 = models.Ingredient.objects.create(
+        ingredient1 = Ingredient.objects.create(
             name='oil',
             recipe=recipe
         )
 
-        ingredient2 = models.Ingredient.objects.create(
+        ingredient2 = Ingredient.objects.create(
             name='cheese',
             recipe=recipe
         )
@@ -58,22 +58,22 @@ class ModelRecipeTests(TestCase):
         """
         Test two recipes and one ingredient
         """
-        recipe1 = models.Recipe.objects.create(
+        recipe1 = Recipe.objects.create(
             name='Cheese cake1',
             description="A delicious cheese cake1!"
         )
 
-        recipe2 = models.Recipe.objects.create(
+        recipe2 = Recipe.objects.create(
             name='Cheese cake2',
             description="A delicious cheese cake2!"
         )
 
-        ingredient1 = models.Ingredient.objects.create(
+        ingredient1 = Ingredient.objects.create(
             name='cheese',
             recipe=recipe1
         )
 
-        ingredient2 = models.Ingredient.objects.create(
+        ingredient2 = Ingredient.objects.create(
             name='cheese',
             recipe=recipe2
         )
