@@ -11,12 +11,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
 
-    def list(self, request):
-        return HttpResponse('list')
-
-    def create(self, request, *args, **kwargs):
-        return HttpResponse('create')
-
     def retrieve(self, request):
         return HttpResponse('retrieve')
 

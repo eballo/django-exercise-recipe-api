@@ -42,6 +42,50 @@ even if that means multiple Ingredient instances with the exact same name
 
 ## Usage
 
+### POST /recipes/
+```
+{
+	"name": "Pizza",
+	"description": "Put it in the oven",
+	"ingredients": [{"name": "dough"}, {"name": "cheese"}, {"name": "tomato"}]
+}
+```
+CURL command
+```
+curl -X POST -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [{"name": "dough"}, {"name": "cheese"}, {"name": "tomato"}]
+}' http://localhost:8000/api/recipes/
+```
+Response:
+```
+{"id":1,"name":"Pizza","description":"Put it in the oven","ingredients":[{"name":"tomato"},{"name":"cheese"},{"name":"dough"}]}
+```
+
+## PATCH /recipes/1/
+```
+{
+    “name”: “Pizza”
+    “description”: “Put it in the oven”,
+    “ingredients”: [{“name”: “casa-tarradellas”}]
+}
+```
+Should delete the previous existing ingredients and put “casa-tarradellas” as only ingredient for recipe.
+
+CURL command
+```
+curl -X PATCH -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [{"name": "casa-tarradellas"}]
+}' http://localhost:8000/api/recipes/
+```
+
+Response:
+```
+{
+	“id”: 1,
+	“name”: “Pizza”
+	“description”: “Put it in the oven”,
+	“ingredients”: [{“name”: “casa-tarradellas”}]
+}
+```
+
 ### GET /recipes/1/ 
 ```
 {
@@ -70,44 +114,6 @@ even if that means multiple Ingredient instances with the exact same name
 	“ingredients”: [{“name”: “dough”}, {“name”: “cheese”}, {“name”: “tomato”}]
     }
 ]
-```
-
-### POST /recipes/
-```
-{
-	“name”: “Pizza”
-	“description”: “Put it in the oven”,
-	“ingredients”: [{“name”: “dough”}, {“name”: “cheese”}, {“name”: “tomato”}]
-}
-```
-Response:
-```
-{
-	“id”: 1,
-	“name”: “Pizza”
-	“description”: “Put it in the oven”,
-	“ingredients”: [{“name”: “dough”}, {“name”: “cheese”}, {“name”: “tomato”}]
-}
-```
-## PATCH /recipes/1/
-```
-{
-    “name”: “Pizza”
-    “description”: “Put it in the oven”,
-    “ingredients”: [{“name”: “casa-tarradellas”}]
-}
-```
-
-Should delete the previous existing ingredients and put “casa-tarradellas” as only ingredient for recipe.
-
-Response:
-```
-{
-	“id”: 1,
-	“name”: “Pizza”
-	“description”: “Put it in the oven”,
-	“ingredients”: [{“name”: “casa-tarradellas”}]
-}
 ```
 
 ## DELETE /recipes/1/
