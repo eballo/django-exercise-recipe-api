@@ -6,6 +6,8 @@ from recipe.serializers import RecipeSerializer
 
 RECIPE_URL = "/api/recipes/"
 
+# To Debug --> import pdb; pdb.set_trace()
+
 def sample_recipe(**params):
     """Create and return a sample recipe for testing"""
     defaults = {
@@ -29,7 +31,7 @@ class PublicRecipeApiTests(TestCase):
         payload = '{"name": "Pizza", "description": "Put it in the oven", "ingredients": [{"name": "dough"}, {"name": "cheese"},{"name": "tomato"}]}'
         
         res = self.client.post(RECIPE_URL, payload, content_type="application/json")
-        #import pdb; pdb.set_trace()
+        
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
 
@@ -60,18 +62,13 @@ class PublicRecipeApiTests(TestCase):
 
     def test_update_recipe(self):
         """Test update a recipe PATCH"""
+        #create a recipe
         recipe = sample_recipe()
-        
-        payload = {
-            "name": "Pizza",
-            "description": "Put it in the oven",
-            "ingredients": [
-                            {"name": "dough"}, 
-                            {"name": "cheese"},
-                            {"name": "tomato"}
-                            ]
-            }
 
-        res = self.client.patch(RECIPE_URL, payload)
+        patch_url = "/api/recipes/" + str(recipe.id) + "/"
+        payload = '{ "name": "Salty Pizza", "description": "Put it in the oven", "ingredients": [ {"name": "salt"}, {"name": "olives"}]}'
+
+        #update the created recipi
+        res = self.client.patch(patch_url, payload, content_type="application/json")
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
