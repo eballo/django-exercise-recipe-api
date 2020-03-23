@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from rest_framework import viewsets
 
 from recipe.serializers import RecipeSerializer
@@ -15,5 +14,5 @@ class RecipeViewSet(viewsets.ModelViewSet):
         query = request.query_params
         if('name' in query):
             self.queryset = Recipe.objects.filter(name__contains=query['name'])
-        
+
         return super().list(request)

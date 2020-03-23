@@ -6,7 +6,9 @@ from recipe.serializers import RecipeSerializer
 
 RECIPE_URL = "/api/recipes/"
 
+# NOTES:
 # To Debug --> import pdb; pdb.set_trace()
+
 
 def sample_recipe(**params):
     """Create and return a sample recipe for testing"""
@@ -27,13 +29,17 @@ class PublicRecipeApiTests(TestCase):
 
     def test_create_a_recipe(self):
         """Test creating a recipes POST"""
-        
-        payload = '{"name": "Pizza", "description": "Put it in the oven", "ingredients": [{"name": "dough"}, {"name": "cheese"},{"name": "tomato"}]}'
-        
-        res = self.client.post(RECIPE_URL, payload, content_type="application/json")
-        
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
+        payload = ('{"name": "Pizza", '
+                   '"description": "Put it in the oven", '
+                   '"ingredients": [{"name": "dough"}, '
+                   '{"name": "cheese"},{"name": "tomato"}]}')
+
+        res = self.client.post(RECIPE_URL,
+                               payload,
+                               content_type="application/json")
+
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
     def test_retrieve_one_recipe(self):
         """Test retriving a list of recipes GET"""
@@ -62,13 +68,17 @@ class PublicRecipeApiTests(TestCase):
 
     def test_update_recipe(self):
         """Test update a recipe PATCH"""
-        #create a recipe
+        # create a recipe
         recipe = sample_recipe()
 
         patch_url = "/api/recipes/" + str(recipe.id) + "/"
-        payload = '{ "name": "Salty Pizza", "description": "Put it in the oven", "ingredients": [ {"name": "salt"}, {"name": "olives"}]}'
+        payload = ('{ "name": "Salty Pizza",'
+                   '"description": "Put it in the oven",'
+                   '"ingredients": [ {"name": "salt"}, {"name": "olives"}]}')
 
-        #update the created recipi
-        res = self.client.patch(patch_url, payload, content_type="application/json")
+        # update the created recipi
+        res = self.client.patch(patch_url,
+                                payload,
+                                content_type="application/json")
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
