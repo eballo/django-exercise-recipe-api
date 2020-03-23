@@ -41,18 +41,6 @@ class PublicRecipeApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
-    def test_retrieve_one_recipe(self):
-        """Test retriving a list of recipes GET"""
-        sample_recipe()
-
-        res = self.client.get(RECIPE_URL)
-
-        recipes = Recipe.objects.all()
-        serilizer = RecipeSerializer(recipes, many=True)
-
-        self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(res.data, serilizer.data)
-
     def test_retrieve_multiple_recipes(self):
         """Test retriving a list of recipes GET"""
         sample_recipe()
@@ -66,6 +54,15 @@ class PublicRecipeApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
+    def test_retrieve_one_recipe(self):
+        """Test retriving one recipe GET"""
+        recipe = sample_recipe()
+        get_url = "/api/recipes/" + str(recipe.id) + "/"
+
+        res = self.client.get(get_url)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
     def test_update_recipe(self):
         """Test update a recipe PATCH"""
         # create a recipe
@@ -76,9 +73,21 @@ class PublicRecipeApiTests(TestCase):
                    '"description": "Put it in the oven",'
                    '"ingredients": [ {"name": "salt"}, {"name": "olives"}]}')
 
-        # update the created recipi
+        # update the created recipe
         res = self.client.patch(patch_url,
                                 payload,
                                 content_type="application/json")
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_delete_recipe(self):
+        """Test update a recipe PATCH"""
+        # create a recipe
+        recipe = sample_recipe()
+
+        delete_url = "/api/recipes/" + str(recipe.id) + "/"
+
+        # delete the created recipe
+        res = self.client.delete(delete_url)
+
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
