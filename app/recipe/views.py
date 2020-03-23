@@ -10,9 +10,3 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-
-    def retrieve(self, request):
-        return HttpResponse('retrieve')
-
-    def destroy(self, request):
-        return HttpResponse('destroy')

@@ -73,7 +73,7 @@ Should delete the previous existing ingredients and put “casa-tarradellas” a
 CURL command
 ```
 curl -X PATCH -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [{"name": "casa-tarradellas"}]
-}' http://localhost:8000/api/recipes/
+}' http://localhost:8000/api/recipes/1/
 ```
 
 Response:
@@ -88,6 +88,9 @@ Response:
 
 ### GET /recipes/1/ 
 ```
+curl -X GET http://localhost:8000/api/recipes/1/
+```
+```
 {
 	“id”: 1,
 	“name”: “Pizza”
@@ -97,15 +100,9 @@ Response:
 ```
 ## GET /recipes/?name=Pi 
 ```
-[
-    {
-	“name”: “Pizza”
-	“description”: “Put it in the oven”,
-	“ingredients”: [{“name”: “dough”}, {“name”: “cheese”}, {“name”: “tomato”}]
-    }
-]
+curl -X GET http://localhost:8000/api/recipes/?name=Pi
 ```
-## GET /recipes/?name=Pi
+
 ```
 [
     {
@@ -117,6 +114,10 @@ Response:
 ```
 
 ## DELETE /recipes/1/
+
+```
+curl -X DELETE http://localhost:8000/api/recipes/1/ 
+```
 
 Response:
 ```
