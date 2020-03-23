@@ -4,6 +4,8 @@ from rest_framework.test import APIClient
 from recipe.models import Recipe
 from recipe.serializers import RecipeSerializer
 
+import json
+
 RECIPE_URL = "/api/recipes/"
 
 # NOTES:
@@ -30,19 +32,25 @@ class PublicRecipeApiTests(TestCase):
     def test_create_a_recipe(self):
         """Test creating a recipes POST"""
 
-        payload = ('{"name": "Pizza", '
-                   '"description": "Put it in the oven", '
-                   '"ingredients": [{"name": "dough"}, '
-                   '{"name": "cheese"},{"name": "tomato"}]}')
+        payload = {"name": "Pizza",
+                   "description": "Put it in the oven",
+                   "ingredients": [
+                       {"name": "dough"},
+                       {"name": "cheese"},
+                       {"name": "tomato"}]}
 
         res = self.client.post(RECIPE_URL,
-                               payload,
+                               json.dumps(payload),
                                content_type="application/json")
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        recipe = Recipe.objects.get(id=res.data['id'])
+        self.assertEqual(res.data['name'], recipe.name)
+        self.assertEqual(res.data['description'], recipe.description)
 
     def test_retrieve_multiple_recipes(self):
         """Test retriving a list of recipes GET"""
+
         sample_recipe()
         sample_recipe()
 
@@ -53,15 +61,19 @@ class PublicRecipeApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
+        self.assertEqual(len(res.data), 2)
 
     def test_retrieve_one_recipe(self):
         """Test retriving one recipe GET"""
+
         recipe = sample_recipe()
         get_url = "/api/recipes/" + str(recipe.id) + "/"
 
         res = self.client.get(get_url)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data['name'], recipe.name)
+        self.assertEqual(res.data['description'], recipe.description)
 
     def test_update_recipe(self):
         """Test update a recipe PATCH"""
@@ -80,8 +92,11 @@ class PublicRecipeApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
+        recipe = Recipe.objects.get(id=recipe.id)
+        self.assertEqual(recipe.name, "Salty Pizza")
+
     def test_delete_recipe(self):
-        """Test update a recipe PATCH"""
+        """Test delete a recipe DELETE"""
         # create a recipe
         recipe = sample_recipe()
 
@@ -91,3 +106,6 @@ class PublicRecipeApiTests(TestCase):
         res = self.client.delete(delete_url)
 
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertRaises(Recipe.DoesNotExist,
+                          Recipe.objects.get,
+                          id=recipe.id)
