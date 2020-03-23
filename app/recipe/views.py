@@ -10,3 +10,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+
+    def list(self, request):
+        query = request.query_params
+        if('name' in query):
+            self.queryset = Recipe.objects.filter(name__contains=query['name'])
+        
+        return super().list(request)
