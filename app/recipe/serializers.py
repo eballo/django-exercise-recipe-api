@@ -45,12 +45,16 @@ class RecipeSerializer(serializers.ModelSerializer):
     def update(self, recipe, validated_data):
         ingredients = validated_data.pop('ingredients')
 
-        recipe.name = validated_data['name']
-        recipe.description = validated_data['description']
+        recipe = super().update(recipe, validated_data)
+        recipe.save()
+
+        # NOTE: Before I was doing this:
+        # recipe.name = validated_data['name']
+        # recipe.description = validated_data['description']
+        # but is better to use:
+        # recipe = super().update(recipe, validated_data)
 
         recipe.ingredients.all().delete()
-
         self.__create_ingredients(ingredients, recipe)
 
-        recipe.save()
         return recipe
