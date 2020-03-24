@@ -100,6 +100,8 @@ class PublicRecipeApiTests(APITestCase):
         res = self.client.delete(delete_url)
 
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertRaises(Recipe.DoesNotExist,
-                          Recipe.objects.get,
-                          id=recipe.id)
+        self.assertFalse(Recipe.objects.filter(id=recipe.id).exists())
+        # OLD CODE
+        #self.assertRaises(Recipe.DoesNotExist,
+        #                  Recipe.objects.get,
+        #                  id=recipe.id)
