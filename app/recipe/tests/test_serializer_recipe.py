@@ -1,6 +1,5 @@
-from django.test import TestCase
 from rest_framework import status
-from rest_framework.test import APIClient
+from rest_framework.test import APITestCase
 from recipe.models import Recipe
 from recipe.serializers import RecipeSerializer
 
@@ -23,11 +22,8 @@ def sample_recipe(**params):
     return Recipe.objects.create(**defaults)
 
 
-class PublicRecipeApiTests(TestCase):
+class PublicRecipeApiTests(APITestCase):
     """ Public recipe API """
-
-    def setUp(self):
-        self.client = APIClient()
 
     def test_create_a_recipe(self):
         """Test creating a recipes POST"""
