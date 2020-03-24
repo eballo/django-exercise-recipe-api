@@ -69,6 +69,22 @@ class PublicRecipeApiTests(APITestCase):
         self.assertEqual(res.data['name'], recipe.name)
         self.assertEqual(res.data['description'], recipe.description)
 
+    def test_filter_recipe(self):
+        """Test filtering a recipe GET"""
+
+        sample_recipe(name="Tortilla", description="easy and tasty")
+        sample_recipe(name="Pasta", description="best pasta ever")
+        sample_recipe(name="Pizza", description="best pizza ever")
+
+        get_url = "/api/recipes/?name=Pi"
+
+        res = self.client.get(get_url)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(res.data), 1)
+        self.assertEqual(res.data[0]['name'], "Pizza")
+        self.assertEqual(res.data[0]['description'], "best pizza ever")
+
     def test_update_recipe(self):
         """Test update a recipe PATCH"""
         # create a recipe
@@ -102,6 +118,6 @@ class PublicRecipeApiTests(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Recipe.objects.filter(id=recipe.id).exists())
         # OLD CODE
-        #self.assertRaises(Recipe.DoesNotExist,
+        # self.assertRaises(Recipe.DoesNotExist,
         #                  Recipe.objects.get,
         #                  id=recipe.id)

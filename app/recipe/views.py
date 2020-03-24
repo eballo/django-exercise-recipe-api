@@ -16,6 +16,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def list(self, request):
         query = request.query_params
         if('name' in query):
-            self.queryset = Recipe.objects.filter(name__contains=query['name'])
+            self.queryset = Recipe.objects.filter(name__icontains=query['name'])
 
         return super().list(request)
