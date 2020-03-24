@@ -3,8 +3,6 @@ from rest_framework.test import APITestCase
 from recipe.models import Recipe
 from recipe.serializers import RecipeSerializer
 
-import json
-
 RECIPE_URL = "/api/recipes/"
 
 # NOTES:
@@ -36,8 +34,8 @@ class PublicRecipeApiTests(APITestCase):
                        {"name": "tomato"}]}
 
         res = self.client.post(RECIPE_URL,
-                               json.dumps(payload),
-                               content_type="application/json")
+                               payload,
+                               format="json")
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
@@ -77,14 +75,14 @@ class PublicRecipeApiTests(APITestCase):
         recipe = sample_recipe()
 
         patch_url = "/api/recipes/" + str(recipe.id) + "/"
-        payload = ('{ "name": "Salty Pizza",'
-                   '"description": "Put it in the oven",'
-                   '"ingredients": [ {"name": "salt"}, {"name": "olives"}]}')
+        payload = {"name": "Salty Pizza",
+                   "description": "Put it in the oven",
+                   "ingredients": [{"name": "salt"}, {"name": "olives"}]}
 
         # update the created recipe
         res = self.client.patch(patch_url,
                                 payload,
-                                content_type="application/json")
+                                format="json")
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
