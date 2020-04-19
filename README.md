@@ -27,11 +27,13 @@ even if that means multiple Ingredient instances with the exact same name
 
 - Check out the project
 - Create the virtualenv
+```
+> pyenv install 3.7.0 
+> pyenv virtualenv 3.7.0 Django
+```
+- create a local env
 
-```> python3.6 -m venv --prompt Django .venv```
-- activate the venv
-
-```> source venv/bin/activate```
+```> pyenv local Django```
 - Install requirements.txt
 
 ```> pip install -r requirements.txt```
@@ -39,6 +41,10 @@ even if that means multiple Ingredient instances with the exact same name
 - Start the server
 
 ```> python manage.py runserver ```
+
+## Execute Migrations
+
+``` docker-compose run --rm app sh -c "python manage.py makemigrations" ```
 
 ## Usage
 
