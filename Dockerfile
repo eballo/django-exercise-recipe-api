@@ -19,6 +19,7 @@ RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static
 RUN adduser -D pythonUser
 RUN chown pythonUser:pythonUser -R /app/
+RUN chown pythonUser:pythonUser -R /vol/
 RUN chmod -R 755 /vol/web
 RUN chmod -R 755 /app/
 USER pythonUser

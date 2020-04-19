@@ -27,7 +27,7 @@ class BaseRecipeAttributesSet(viewsets.GenericViewSet,
         return queryset.order_by('-name').distinct()
 
 
-class TagViewSet(viewsets.ModelViewSet):
+class TagViewSet(BaseRecipeAttributesSet):
     """Manage tags in the database"""
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
@@ -39,7 +39,7 @@ class IngredientViewSet(BaseRecipeAttributesSet):
     serializer_class = IngredientSerializer
 
 
-class RecipeViewSet(BaseRecipeAttributesSet):
+class RecipeViewSet(viewsets.ModelViewSet):
     """ Manage a Recipe in the database """
 
     queryset = Recipe.objects.all()

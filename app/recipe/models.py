@@ -3,7 +3,7 @@ import os
 from django.db import models
 
 
-def recipe_image_file_path(filename):
+def recipe_image_file_path(instance, filename):
     """Generate file path for new recipe image"""
     ext = filename.split('.')[-1]  # returns the extension of the file name
     filename = f'{uuid.uuid4()}.{ext}'
