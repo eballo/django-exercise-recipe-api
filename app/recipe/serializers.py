@@ -1,60 +1,66 @@
 from rest_framework import serializers
-from recipe.models import Ingredient, Recipe
+from recipe.models import Ingredient, Recipe, Tag
 
 # Ref documentation:
 # https://www.django-rest-framework.org/api-guide/serializers/
 
 
+class TagSerializer(serializers.ModelSerializer):
+    """Serializer for tag objects"""
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'name')
+        read_only_fields = ('id',)
+
+
 class IngredientSerializer(serializers.ModelSerializer):
-    """ Serializer for Ingredients Objects """
+    """Serializer for Ingredient objects"""
 
     class Meta:
         model = Ingredient
-        fields = ['name']
+        fields = ('id', 'name')
         read_only_fields = ('id',)
 
 
 class RecipeSerializer(serializers.ModelSerializer):
     """ Serializer for Recipe Objects """
 
-    ingredients = IngredientSerializer(many=True)
+    """Serializer for Recipe objects"""
+    ingredients = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Ingredient.objects.all()
+    )
+    tags = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Tag.objects.all()
+    )
 
     class Meta:
         model = Recipe
-        fields = ['id', 'name', 'description', 'ingredients']
+        fields = (
+                  'id',
+                  'name',
+                  'ingredients',
+                  'tags',
+                  'description',
+                  'time_minutes',
+                  'price',
+                  'link'
+        )
         read_only_fields = ('id',)
 
-    def __create_ingredients(self, ingredients, recipe):
-        for ingredient in ingredients:
-            Ingredient.objects.create(
-                name=ingredient['name'],
-                recipe=recipe
-            )
 
-    def create(self, validated_data):
-        ingredients = validated_data.pop('ingredients')
+class RecipeDetailSerializer(RecipeSerializer):
+    """Serialize a recipe detail"""
+    ingredients = IngredientSerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
 
-        recipe = Recipe.objects.create(
-            name=validated_data['name'],
-            description=validated_data['description']
-        )
 
-        self.__create_ingredients(ingredients, recipe)
-        return recipe
+class RecipeImageSerializer(serializers.ModelSerializer):
+    """serializer for uploading images to recipes"""
 
-    def update(self, recipe, validated_data):
-        ingredients = validated_data.pop('ingredients')
-
-        recipe = super().update(recipe, validated_data)
-        recipe.save()
-
-        # NOTE: Before I was doing this:
-        # recipe.name = validated_data['name']
-        # recipe.description = validated_data['description']
-        # but is better to use:
-        # recipe = super().update(recipe, validated_data)
-
-        recipe.ingredients.all().delete()
-        self.__create_ingredients(ingredients, recipe)
-
-        return recipe
+    class Meta:
+        model = Recipe
+        fields = ('id', 'image')
+        read_only_fields = ('id',)
