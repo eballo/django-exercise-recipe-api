@@ -1,0 +1,8 @@
+tuscurl -X POST -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [{"name": "dough"}, {"name": "cheese"}, {"name": "tomato"}]
+}' http://localhost:8000/api/recipes/
+
+curl -X POST -H "Content-Type: application/json" --data '{"name": "Tortilla Patatas","description": "Tipical spanish omelete","ingredients": [{"name": "potatoes"}, {"name": "eggs"}, {"name": "oil"}, {"name": "salt"}]
+}' http://localhost:8000/api/recipes/
+
+curl -X POST -H "Content-Type: application/json" --data '{"name": "Greek Salad","description": "Tipical Greek Salad","ingredients": [{"name": "tomatoes"}, {"name": "olives"}, {"name": "cheese"}]
+}' http://localhost:8000/api/recipes/
