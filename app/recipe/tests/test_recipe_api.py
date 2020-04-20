@@ -28,10 +28,8 @@ class PublicRecipeApiTests(APITestCase):
 
         payload = {"name": "Pizza",
                    "description": "Put it in the oven",
-                   "ingredients": [
-                       {"name": "dough"},
-                       {"name": "cheese"},
-                       {"name": "tomato"}]}
+                   "ingredients": [],
+                   "tags": []}
 
         res = self.client.post(RECIPE_URL,
                                payload,
@@ -93,7 +91,8 @@ class PublicRecipeApiTests(APITestCase):
         patch_url = "/api/recipes/" + str(recipe.id) + "/"
         payload = {"name": "Salty Pizza",
                    "description": "Put it in the oven",
-                   "ingredients": [{"name": "salt"}, {"name": "olives"}]}
+                   "ingredients": [],
+                   "tags": []}
 
         # update the created recipe
         res = self.client.patch(patch_url,
