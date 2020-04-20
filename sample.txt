@@ -1,8 +1,18 @@
-tuscurl -X POST -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [{"name": "dough"}, {"name": "cheese"}, {"name": "tomato"}]
-}' http://localhost:8000/api/recipes/
+## Create Ingredients
 
-curl -X POST -H "Content-Type: application/json" --data '{"name": "Tortilla Patatas","description": "Tipical spanish omelete","ingredients": [{"name": "potatoes"}, {"name": "eggs"}, {"name": "oil"}, {"name": "salt"}]
-}' http://localhost:8000/api/recipes/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "oil"}' http://localhost:8000/api/recipes/ingredients/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "salt"}' http://localhost:8000/api/recipes/ingredients/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "tomatoes"}' http://localhost:8000/api/recipes/ingredients/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "potatoes"}' http://localhost:8000/api/recipes/ingredients/
 
-curl -X POST -H "Content-Type: application/json" --data '{"name": "Greek Salad","description": "Tipical Greek Salad","ingredients": [{"name": "tomatoes"}, {"name": "olives"}, {"name": "cheese"}]
-}' http://localhost:8000/api/recipes/
+## Create Tags
+
+curl -X POST -H "Content-Type: application/json" --data '{"name": "meal"}' http://localhost:8000/api/recipes/tags/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "desert"}' http://localhost:8000/api/recipes/tags/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "vegetarian"}' http://localhost:8000/api/recipes/tags/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "breakfast"}' http://localhost:8000/api/recipes/tags/
+
+## Create Recipes
+curl -X POST -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [ 1, 2 ,3], "tags": [ 3 ] }' http://localhost:8000/api/recipes/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "Tortilla Patatas","description": "Tipical spanish omelete","ingredients": [ 1, 2, 4 ], "tags": [ 3 ] }' http://localhost:8000/api/recipes/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "Greek Salad","description": "Tipical Greek Salad","ingredients": [ 1, 2, 4 ], "tags": [ 3 ] }' http://localhost:8000/api/recipes/
