@@ -46,6 +46,10 @@ even if that means multiple Ingredient instances with the exact same name
 
 ``` docker-compose run --rm app sh -c "python manage.py makemigrations" ```
 
+## Exute Tests
+
+``` docker-compose run --rm app sh -c "python manage.py test && flake8" ```
+
 ## Usage
 
 ### POST /recipes/
