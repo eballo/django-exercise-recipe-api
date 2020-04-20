@@ -11,9 +11,20 @@ be able to manage a recipe with ingredients:
 - Filter a Recipe
 - Update a Recipe 
 - Delete Recipe
+- Add a Ingredient
+- Add a Tag
+- Add a Image
 
 # Data Models
 
+### Version 2.0:
+**Recipe:** Name, Description, time_minutes, price, link, image
+**Ingredient:** Name, Recipe (ForeignKey)
+**Tags:** Name, Recipe (ForeignKey)
+
+A given ingredient or tag belongs to one or many recipes
+
+### Version 1.0:
 **Recipe:** Name, Description
 **Ingredient:** Name, Recipe (ForeignKey)
 
