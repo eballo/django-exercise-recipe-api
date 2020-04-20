@@ -18,17 +18,17 @@ be able to manage a recipe with ingredients:
 # Data Models
 
 ### Version 2.0:
-**Recipe:** Name, Description, time_minutes, price, link, image
-**Ingredient:** Name, Recipe (ForeignKey)
-**Tags:** Name, Recipe (ForeignKey)
+- **Recipe:** Name, Description, time_minutes, price, link, image
+- **Ingredient:** Name, Recipe (ForeignKey)
+- **Tags:** Name, Recipe (ForeignKey)
 
 A given ingredient or tag belongs to one or many recipes
 
 ### Version 1.0:
-**Recipe:** Name, Description
-**Ingredient:** Name, Recipe (ForeignKey)
+- **Recipe:** Name, Description
+- **Ingredient:** Name, Recipe (ForeignKey)
 
-**Assumption:** a given ingredient belongs only to one recipe, 
+- **Assumption:** a given ingredient belongs only to one recipe, 
 even if that means multiple Ingredient instances with the exact same name
 
 ## Getting up and running
