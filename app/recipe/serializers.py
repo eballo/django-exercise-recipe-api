@@ -24,8 +24,6 @@ class IngredientSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
-    """ Serializer for Recipe Objects """
-
     """Serializer for Recipe objects"""
     ingredients = serializers.PrimaryKeyRelatedField(
         many=True,

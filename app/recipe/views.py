@@ -16,7 +16,6 @@ class BaseRecipeAttributesSet(viewsets.GenericViewSet,
     """Base class for common logic in the recipe attributes"""
 
     def get_queryset(self):
-        """Return objects for the current authenticated user only"""
         assigned_only = bool(
             int(self.request.query_params.get('assigned_only', 0))
         )
@@ -42,7 +41,7 @@ class IngredientViewSet(BaseRecipeAttributesSet):
 class RecipeViewSet(viewsets.ModelViewSet):
     """ Manage a Recipe in the database """
 
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.all().order_by('-id')
     serializer_class = RecipeSerializer
 
     def _params_to_ints(self, qs):
