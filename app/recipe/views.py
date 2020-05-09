@@ -41,7 +41,7 @@ class IngredientViewSet(BaseRecipeAttributesSet):
 class RecipeViewSet(viewsets.ModelViewSet):
     """ Manage a Recipe in the database """
 
-    queryset = Recipe.objects.all().order_by('-id')
+    queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
 
     def _params_to_ints(self, qs):
@@ -61,7 +61,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             ingredients_ids = self._params_to_ints(ingredients)
             queryset = queryset.filter(ingredients__id__in=ingredients_ids)
 
-        return queryset
+        return queryset.order_by('-id')
 
     def get_serializer_class(self):
         """Return appropiate serializer class"""
