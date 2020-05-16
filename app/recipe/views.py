@@ -42,7 +42,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     """ Manage a Recipe in the database """
 
     queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
+    serializer_class = RecipeDetailSerializer
 
     def _params_to_ints(self, qs):
         """Convert a list of strings IDs to a list of integers"""
@@ -64,7 +64,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return queryset.order_by('-id')
 
     def get_serializer_class(self):
-        """Return appropiate serializer class"""
+        """Return the serializer class"""
         if self.action == 'retrieve':
             return RecipeDetailSerializer
         elif self.action == 'upload_image':
