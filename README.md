@@ -32,8 +32,6 @@ A given ingredient or tag belongs to one or many recipes
 even if that means multiple Ingredient instances with the exact same name
 
 ## Getting up and running
-### With Docker
-```> docker-compose -up ```
 ### With virtualenv
 
 - Check out the project
@@ -53,11 +51,17 @@ even if that means multiple Ingredient instances with the exact same name
 
 ```> python manage.py runserver ```
 
-## Execute Migrations
+### With Docker
+```> docker-compose -up ```
+
+If we want some sample data
+
+```> ./sample.sh ```
+#### Execute Migrations
 
 ``` docker-compose run --rm app sh -c "python manage.py makemigrations" ```
 
-## Exute Tests
+#### Exute Tests
 
 ``` docker-compose run --rm app sh -c "python manage.py test && flake8" ```
 
@@ -66,15 +70,17 @@ even if that means multiple Ingredient instances with the exact same name
 ### POST /recipes/
 ```
 {
-	"name": "Pizza",
-	"description": "Put it in the oven",
-	"ingredients": [{"name": "dough"}, {"name": "cheese"}, {"name": "tomato"}]
+    "name": "Pizza",
+    "description": "Put it in the oven", 
+    "time_minutes": 10, 
+    "price": 5.0, 
+    "ingredients": [ 1, 2 ,3], 
+    "tags": [ 3 ] 
 }
 ```
 CURL command
 ```
-curl -X POST -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [{"name": "dough"}, {"name": "cheese"}, {"name": "tomato"}]
-}' http://localhost:8000/api/recipes/
+curl -X POST -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven", "time_minutes": 10, "price": 5.0, "ingredients": [ 1, 2 ,3], "tags": [ 3 ] }' http://localhost:8000/api/recipes/
 ```
 Response:
 ```
@@ -86,24 +92,29 @@ Response:
 {
     “name”: “Pizza”
     “description”: “Put it in the oven”,
-    “ingredients”: [{“name”: “casa-tarradellas”}]
+    “ingredients”: [1]
 }
 ```
-Should delete the previous existing ingredients and put “casa-tarradellas” as only ingredient for recipe.
+Should delete the previous existing ingredients and put 1 as only ingredient for recipe.
 
 CURL command
 ```
-curl -X PATCH -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [{"name": "casa-tarradellas"}]
+curl -X PATCH -H "Content-Type: application/json" --data '{"name": "Pizza","description": "Put it in the oven","ingredients": [1]
 }' http://localhost:8000/api/recipes/1/
 ```
 
 Response:
 ```
 {
-	“id”: 1,
-	“name”: “Pizza”
-	“description”: “Put it in the oven”,
-	“ingredients”: [{“name”: “casa-tarradellas”}]
+    "id":1,
+    "name":"Pizza",
+    "ingredients":[1],
+    "tags":[3],
+    "description":"Put it in the oven",
+    "time_minutes":10,
+    "price":"5.00",
+    "image":"http://localhost:8000/media/uploads/recipe/6ab14a0f-7f91-4655-a033-cc47673fc87d.jpg",
+    "link":""
 }
 ```
 
@@ -113,10 +124,19 @@ curl -X GET http://localhost:8000/api/recipes/1/
 ```
 ```
 {
-	“id”: 1,
-	“name”: “Pizza”
-	“description”: “Put it in the oven”,
-	“ingredients”: [{“name”: “dough”}, {“name”: “cheese”}, {“name”: “tomato”}]
+    "id":1,
+    "name":"Pizza",
+    "ingredients":[
+                    {"id":1,"name":"oil"},
+                    {"id":2,"name":"salt"},
+                    {"id":3,"name":"tomatoes"}
+                ],
+    "tags":[{"id":3,"name":"vegetarian"}],
+    "description":"Put it in the oven",
+    "time_minutes":10,
+    "price":"5.00",
+    "image":"http://localhost:8000/media/uploads/recipe/6ab14a0f-7f91-4655-a033-cc47673fc87d.jpg",
+    "link":""
 }
 ```
 ## GET /recipes/?name=Pi 
@@ -127,9 +147,15 @@ curl -X GET http://localhost:8000/api/recipes/?name=Pi
 ```
 [
     {
-	“name”: “Pizza”
-	“description”: “Put it in the oven”,
-	“ingredients”: [{“name”: “dough”}, {“name”: “cheese”}, {“name”: “tomato”}]
+        "id":1,
+        "name":"Pizza",
+        "ingredients":[1,2,3],
+        "tags":[3],
+        "description":"Put it in the oven",
+        "time_minutes":10,
+        "price":"5.00",
+        "image":"http://localhost:8000/media/uploads/recipe/6ab14a0f-7f91-4655-a033-cc47673fc87d.jpg",
+        "link":""
     }
 ]
 ```
