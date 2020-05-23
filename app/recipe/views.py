@@ -99,3 +99,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             self.queryset = self.queryset.filter(name__icontains=query['name'])
 
         return super().list(request)
+
+
+class RecipeDetailsViewSet(RecipeViewSet):
+    serializer_class = RecipeDetailSerializer
