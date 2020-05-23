@@ -42,7 +42,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     """ Manage a Recipe in the database """
 
     queryset = Recipe.objects.all()
-    serializer_class = RecipeDetailSerializer
+    serializer_class = RecipeSerializer
 
     def _params_to_ints(self, qs):
         """Convert a list of strings IDs to a list of integers"""

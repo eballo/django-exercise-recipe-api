@@ -44,6 +44,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                   'description',
                   'time_minutes',
                   'price',
+                  'image',
                   'link'
         )
         read_only_fields = ('id',)
