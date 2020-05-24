@@ -4,15 +4,11 @@ from recipe.models import Recipe, Ingredient
 
 
 class ModelRecipeTests(TestCase):
-
     def test_recipe_str(self):
         """
         Test the recipe model string representation
         """
-        recipe = Recipe.objects.create(
-            name='Cheese cake',
-            description="A delicious cheese cake!"
-        )
+        recipe = Recipe.objects.create(name="Cheese cake", description="A delicious cheese cake!")
 
         self.assertEqual(str(recipe), recipe.name)
 
@@ -20,15 +16,9 @@ class ModelRecipeTests(TestCase):
         """
         Test one ingredients model string representation
         """
-        recipe = Recipe.objects.create(
-            name='Cheese cake',
-            description="A delicious cheese cake!"
-        )
+        recipe = Recipe.objects.create(name="Cheese cake", description="A delicious cheese cake!")
 
-        ingredient = Ingredient.objects.create(
-            name='cheese',
-            recipe=recipe
-        )
+        ingredient = Ingredient.objects.create(name="cheese", recipe=recipe)
 
         self.assertEqual(str(ingredient), ingredient.name)
 
@@ -36,20 +26,11 @@ class ModelRecipeTests(TestCase):
         """
         Test two ingredients model string representation
         """
-        recipe = Recipe.objects.create(
-            name='Cheese cake',
-            description="A delicious cheese cake!"
-        )
+        recipe = Recipe.objects.create(name="Cheese cake", description="A delicious cheese cake!")
 
-        ingredient1 = Ingredient.objects.create(
-            name='oil',
-            recipe=recipe
-        )
+        ingredient1 = Ingredient.objects.create(name="oil", recipe=recipe)
 
-        ingredient2 = Ingredient.objects.create(
-            name='cheese',
-            recipe=recipe
-        )
+        ingredient2 = Ingredient.objects.create(name="cheese", recipe=recipe)
 
         self.assertEqual(str(ingredient1), ingredient1.name)
         self.assertEqual(str(ingredient2), ingredient2.name)
@@ -58,25 +39,13 @@ class ModelRecipeTests(TestCase):
         """
         Test two recipes and one ingredient
         """
-        recipe1 = Recipe.objects.create(
-            name='Cheese cake1',
-            description="A delicious cheese cake1!"
-        )
+        recipe1 = Recipe.objects.create(name="Cheese cake1", description="A delicious cheese cake1!")
 
-        recipe2 = Recipe.objects.create(
-            name='Cheese cake2',
-            description="A delicious cheese cake2!"
-        )
+        recipe2 = Recipe.objects.create(name="Cheese cake2", description="A delicious cheese cake2!")
 
-        ingredient1 = Ingredient.objects.create(
-            name='cheese',
-            recipe=recipe1
-        )
+        ingredient1 = Ingredient.objects.create(name="cheese", recipe=recipe1)
 
-        ingredient2 = Ingredient.objects.create(
-            name='cheese',
-            recipe=recipe2
-        )
+        ingredient2 = Ingredient.objects.create(name="cheese", recipe=recipe2)
 
         self.assertEqual(str(ingredient1), ingredient1.name)
         self.assertEqual(str(ingredient2), ingredient2.name)
