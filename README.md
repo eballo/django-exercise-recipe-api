@@ -1,6 +1,6 @@
 # Backend Exercise - Recipe API
 
-[![Build Status](https://travis-ci.org/eballo/exercise-recipe-api.svg?branch=master)](https://travis-ci.org/eballo/exercise-recipe-api)
+[![Build Status](https://travis-ci.org/eballo/django-exercise-recipe-api.svg?branch=master)](https://travis-ci.org/eballo/django-exercise-recipe-api)
 
 Backend Web application created using Django to provide the following end points to
 be able to manage a recipe with ingredients:
