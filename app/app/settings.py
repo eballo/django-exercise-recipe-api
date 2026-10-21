@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = "/vol/web/media"
+MEDIA_ROOT = os.environ.get("MEDIA_ROOT", "/vol/web/media")
 STATIC_ROOT = "/vol/web/static"
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
