@@ -99,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -110,7 +110,6 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
-USE_L10N = True
 
 USE_TZ = True
 
@@ -123,3 +122,5 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = "/vol/web/media"
 STATIC_ROOT = "/vol/web/static"
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
